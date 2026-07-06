@@ -60,8 +60,9 @@ list_of_files = [
     # prompts
     "app/prompts/__init__.py",
     "app/prompts/planner_prompt.py",
+    "app/prompts/decision_prompt.py",
+    "app/prompts/executor_prompt.py",
     "app/prompts/reflection_prompt.py",
-    "app/prompts/document_prompt.py",
 
     # top-level data/output dirs (with .gitkeep so empty dirs are tracked)
     "checkpoints/.gitkeep",
