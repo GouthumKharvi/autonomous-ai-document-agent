@@ -68,12 +68,13 @@ Return your answer clearly.
     def build_executor_prompt(
         request: str,
         document_type: str,
+        execution_plan: List[str],
         assumptions: List[str],
     ) -> str:
         """
         Prompt for the Executor Node.
         """
-
+        plan = "\n".join(execution_plan)
         assumption_text = "\n".join(assumptions)
 
         return f"""
@@ -83,6 +84,9 @@ Generate a professional {document_type}.
 
 User Request:
 {request}
+
+Execution Plan:
+{plan}
 
 Assumptions:
 {assumption_text}

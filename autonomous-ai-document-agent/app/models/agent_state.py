@@ -68,6 +68,7 @@ class AgentState(TypedDict):
     # ==========================================================
 
     thread_id: str
+    retry_count: int
 
     # ==========================================================
     # Error Handling

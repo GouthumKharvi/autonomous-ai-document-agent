@@ -7,9 +7,9 @@ logging.basicConfig(level=logging.INFO, format="[%(asctime)s]: %(message)s")
 project_name = "autonomous-ai-document-agent"
 
 list_of_files = [
-    # app root
-    "app/__init__.py",
-    "app/main.py",
+    # root application
+    "__init__.py",
+    "main.py",
 
     # api
     "app/api/__init__.py",

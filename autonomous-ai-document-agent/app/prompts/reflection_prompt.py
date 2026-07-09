@@ -27,23 +27,42 @@ Generated Document:
 
 Instructions:
 
-If the document satisfies all review criteria, respond exactly as:
+If the document satisfies ALL review criteria, respond EXACTLY in the following format:
 
 APPROVED
 
-Then provide a short explanation.
+Strengths:
+- Strength 1
+- Strength 2
+- Strength 3
 
-If the document does not satisfy the review criteria, respond exactly as:
+Suggestions:
+- Optional improvement 1
+- Optional improvement 2
+
+------------------------------------------------------------
+
+If the document does NOT satisfy the review criteria, respond EXACTLY in the following format:
 
 NOT APPROVED
 
-Then explain:
+Missing Sections:
+- Missing section 1
+- Missing section 2
 
-- Missing sections
-- Grammar issues
-- Structural issues
-- Suggested improvements
+Grammar Issues:
+- Grammar issue 1
+- Grammar issue 2
 
-Do not regenerate the document.
+Structural Issues:
+- Structural issue 1
+- Structural issue 2
+
+Suggestions:
+- Improvement 1
+- Improvement 2
+
+Do NOT regenerate the document.
 Only review the document.
+Return only the review in the format above.
 """

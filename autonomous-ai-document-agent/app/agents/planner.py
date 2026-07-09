@@ -46,6 +46,8 @@ class PlannerAgent:
 
         execution_plan: list[str] = []
 
+        step_number = 1
+
         for line in response.splitlines():
 
             line = line.strip()
@@ -53,7 +55,11 @@ class PlannerAgent:
             if not line:
                 continue
 
-            execution_plan.append(line)
+            execution_plan.append(
+                f"Step {step_number}: {line} | Status: Pending"
+            )
+
+            step_number += 1
 
         logger.info(
             "Planner Agent Completed. Generated %d execution steps.",

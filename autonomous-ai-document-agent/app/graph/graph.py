@@ -4,10 +4,15 @@ LangGraph Workflow.
 Builds and compiles the autonomous AI document workflow.
 """
 
-from langgraph.graph import StateGraph, START, END
+from langgraph.graph import (
+    StateGraph,
+    START,
+    END,
+)
 
 from app.graph.state import AgentState
 from app.graph.memory import GraphMemory
+from app.tools.logger import logger
 
 from app.graph.nodes import (
     validation_node,
@@ -120,9 +125,17 @@ class AutonomousDocumentGraph:
             REFLECTION_NODE,
         )
 
-        self.workflow.add_edge(
+        # ==================================================
+        # Reflection Decision
+        # ==================================================
+
+        self.workflow.add_conditional_edges(
             REFLECTION_NODE,
-            DOCUMENT_NODE,
+            self._reflection_router,
+            {
+                "approved": DOCUMENT_NODE,
+                "retry": EXECUTOR_NODE,
+            },
         )
 
         self.workflow.add_edge(
@@ -134,6 +147,42 @@ class AutonomousDocumentGraph:
             RESPONSE_NODE,
             END,
         )
+
+    def _reflection_router(
+        self,
+        state: AgentState,
+    ):
+        """
+        Route the workflow after reflection.
+
+        If approved -> Document
+
+        If rejected -> Retry Executor
+
+        Maximum retries = 2
+        """
+
+        if state["is_approved"]:
+
+            logger.info(
+                "Reflection approved the document."
+            )
+
+            return "approved"
+
+        if state.get("retry_count", 0) >= 2:
+
+            logger.warning(
+                "Maximum retry limit reached. Proceeding with current document."
+            )
+
+            return "approved"
+
+        logger.info(
+            "Reflection rejected the document. Retrying Executor."
+        )
+
+        return "retry"
 
     def get_graph(self):
         """

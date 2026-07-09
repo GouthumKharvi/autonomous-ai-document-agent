@@ -54,7 +54,11 @@ class DecisionAgent:
 
         response = self.llm.invoke(prompt)
 
-        document_type = "Business Proposal"
+        # -----------------------------------------------------
+        # Try to extract document type from the LLM response
+        # -----------------------------------------------------
+
+        document_type = None
 
         for line in response.splitlines():
 
@@ -64,6 +68,46 @@ class DecisionAgent:
 
                 document_type = line.split(":", 1)[1].strip()
                 break
+
+        # -----------------------------------------------------
+        # Fallback Mapping (if LLM fails)
+        # -----------------------------------------------------
+
+        if not document_type:
+
+            request_lower = request.lower()
+
+            if "meeting" in request_lower:
+                document_type = "Meeting Minutes"
+
+            elif "proposal" in request_lower:
+                document_type = "Business Proposal"
+
+            elif (
+                "requirement" in request_lower
+                or "requirements" in request_lower
+                or "srs" in request_lower
+            ):
+                document_type = "Software Requirements Specification (SRS)"
+
+            elif (
+                "policy" in request_lower
+                or "procedure" in request_lower
+                or "sop" in request_lower
+            ):
+                document_type = "Standard Operating Procedure"
+
+            elif "design" in request_lower:
+                document_type = "Technical Design"
+
+            elif "report" in request_lower:
+                document_type = "Business Report"
+
+            elif "plan" in request_lower:
+                document_type = "Project Plan"
+
+            else:
+                document_type = "Business Proposal"
 
         assumptions = AssumptionService.generate_assumptions(
             document_type=document_type

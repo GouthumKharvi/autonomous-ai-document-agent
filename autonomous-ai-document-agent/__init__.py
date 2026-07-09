@@ -1,0 +1,3 @@
+"""
+Autonomous AI Document Agent.
+"""

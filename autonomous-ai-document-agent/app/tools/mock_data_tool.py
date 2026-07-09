@@ -92,6 +92,21 @@ class MockDataProvider:
             "review_cycle": "Every 6 Months"
         },
 
+        "Software Requirements Specification (SRS)": {
+            "project_name": "AI-Powered E-commerce Platform",
+            "version": "1.0",
+            "client": "ABC Technologies Pvt. Ltd.",
+            "industry": "Artificial Intelligence",
+            "location": "Bengaluru, India",
+            "budget": "₹25 Lakhs",
+            "timeline": "6 Months",
+            "team_size": "6 Members",
+            "project_manager": "John Smith",
+            "development_methodology": "Agile Scrum",
+            "document_standard": "IEEE 830",
+            "technology_stack": "FastAPI, LangGraph, Gemini, PostgreSQL"
+        },
+
         "Product Specification": {
             "product_name": "AI Resume Screening System",
             "version": "1.0",
